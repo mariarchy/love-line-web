@@ -130,12 +130,12 @@ export function PhoneLookup({
                 x: [0, -3, 3, -2, 2, -1, 1, 0],
                 transition: { duration: 0.5, delay: 0.1 },
               }}
-              className="rounded-lg border border-love-text/25 bg-love-text/5 px-6 py-5 text-center backdrop-blur-sm"
+              className="rounded-lg border border-love-text/25 bg-love-text/5 px-6 py-5 text-center backdrop-blur-sm gap-2"
             >
-              <p className="text-xs tracking-widest opacity-80 mb-2">
-                your blind date
+              <p className="text-sm italic opacity-90">
+                call in
               </p>
-              <p className="text-xl font-medium tracking-wide">
+              <p className="mt-3 text-xl font-medium tracking-wide">
                 {dateLabel}
               </p>
               <p className="mt-1 text-lg text-love-text/90">
@@ -143,7 +143,7 @@ export function PhoneLookup({
               </p>
               {result.dateName && (
                 <p className="mt-3 text-sm italic opacity-90">
-                  {result.dateName}
+                  your match will be waiting
                 </p>
               )}
             </motion.div>
