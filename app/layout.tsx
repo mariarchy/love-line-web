@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "♡ ✿ love line ✿ ♡",
   description:
     "modern dating is hopeless. blind phone date. no bounds.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
