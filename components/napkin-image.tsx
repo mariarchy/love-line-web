@@ -9,7 +9,7 @@ export async function NapkinImage() {
   const region = await getRegion();
   const src = NAPKIN_IMAGES[region];
   return (
-    <div className="py-[7%] overflow-visible">
+    <div className="py-[10%] overflow-visible">
       <figure className="mt-2 flex shrink-0 justify-center rotate-45 transition-transform duration-300 ease-out hover:scale-[1.02] cursor-default overflow-visible">
         <img
           src={src}
