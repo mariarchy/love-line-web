@@ -2,12 +2,12 @@
 // `npx prisma db pull` after backend schema changes to refresh this file.
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Participant {
