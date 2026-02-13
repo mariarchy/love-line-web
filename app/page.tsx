@@ -8,7 +8,7 @@ export default function HomePage() {
       <h1 className="title text-[clamp(34px,4.6vw,56px)] font-bold tracking-[0.09em] shrink-0">
         ♡ ✿ love line ✿ ♡
       </h1>
-      
+
       <NapkinImage />
 
       <div className="copy max-w-[560px] mx-auto">
@@ -24,7 +24,7 @@ export default function HomePage() {
           href="/letter"
           className="text-love-text no-underline italic text-[1.1em] tracking-wide hover:underline"
         >
-          ── .✧ before your date ✧. ──
+          ── .✧ read me before your date ✧. ──
         </Link>
       </p>
     </main>

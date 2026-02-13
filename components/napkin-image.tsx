@@ -9,8 +9,8 @@ export async function NapkinImage() {
   const region = await getRegion();
   const src = NAPKIN_IMAGES[region];
   return (
-    <div className="py-[10%]">
-      <figure className="mt-2 flex shrink-0 justify-center rotate-45">
+    <div className="py-[7%] overflow-visible">
+      <figure className="mt-2 flex shrink-0 justify-center rotate-45 transition-transform duration-300 ease-out hover:scale-[1.02] cursor-default overflow-visible">
         <img
           src={src}
           alt="Toll-free number to call for your blind date"
