@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "♡ ✿ love line ✿ ♡",
   description:
-    "modern dating is hopeless. blind phone date. no bounds.",
+    "maybe we connect better with less — a valentine's day phone line experiment",
   icons: {
     icon: "/icon.svg",
   },
