@@ -1,0 +1,36 @@
+// Mirrors the backend (love-line) schema. Backend owns migrations; run
+// `npx prisma db pull` after backend schema changes to refresh this file.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Participant {
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String   @unique // E.164 (backend normalizes via normalizePhoneNumber)
+  createdAt DateTime @default(now())
+
+  matchesAsParticipant    Match[] @relation("ParticipantMatches")
+  matchesAsMatchParticipant Match[] @relation("MatchParticipant")
+
+  @@map("participants")
+}
+
+model Match {
+  id                 Int      @id @default(autoincrement())
+  participantId      Int
+  matchParticipantId Int
+  scheduledAt        DateTime?
+  createdAt          DateTime @default(now())
+
+  participant      Participant @relation("ParticipantMatches", fields: [participantId], references: [id], onDelete: Cascade)
+  matchParticipant Participant @relation("MatchParticipant", fields: [matchParticipantId], references: [id], onDelete: Cascade)
+
+  @@map("matches")
+}
