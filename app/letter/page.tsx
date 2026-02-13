@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 
 export const metadata = {
   title: "before your date — ♡ love line ♡",

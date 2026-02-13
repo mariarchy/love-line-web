@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/cn";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { cn } from "@/lib/utils";
 
 type LookupResult = {
   ok: true;
@@ -16,7 +16,11 @@ type LookupError = {
   error: string;
 };
 
-export function PhoneLookup() {
+export function PhoneLookup({
+  defaultCountry = "US",
+}: {
+  defaultCountry?: React.ComponentProps<typeof PhoneInput>["defaultCountry"];
+}) {
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [result, setResult] = useState<LookupResult | null>(null);
@@ -24,8 +28,7 @@ export function PhoneLookup() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const raw = phone.trim();
-    if (!raw) return;
+    if (!phone || phone.length < 10) return;
 
     setStatus("loading");
     setError(null);
@@ -35,7 +38,7 @@ export function PhoneLookup() {
       const res = await fetch("/api/lookup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: raw }),
+        body: JSON.stringify({ phone }),
       });
       const data: LookupResult | LookupError = await res.json();
 
@@ -68,16 +71,19 @@ export function PhoneLookup() {
         <label htmlFor="phone" className="sr-only">
           Your phone number
         </label>
-        <Input
+        <PhoneInput
           id="phone"
           type="tel"
+          defaultCountry={defaultCountry}
           placeholder="your number"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={setPhone}
           disabled={status === "loading"}
-          autoComplete="tel"
+          international
           className={cn(
-            status === "error" && "border-red-400/60 focus:ring-red-400/50"
+            "w-full rounded-md border border-love-text/30 focus-within:ring-2 focus-within:ring-love-text/50 focus-within:ring-offset-2 focus-within:ring-offset-love-bg [&:has(input:disabled)]:opacity-50",
+            status === "error" &&
+              "border-red-400/60 focus-within:ring-red-400/50"
           )}
         />
         <button
@@ -121,7 +127,7 @@ export function PhoneLookup() {
             <motion.div
               initial={{ x: 0 }}
               animate={{
-                x: [0, -6, 6, -4, 4, -2, 2, 0],
+                x: [0, -3, 3, -2, 2, -1, 1, 0],
                 transition: { duration: 0.5, delay: 0.1 },
               }}
               className="rounded-lg border border-love-text/25 bg-love-text/5 px-6 py-5 text-center backdrop-blur-sm"

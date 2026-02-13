@@ -9,11 +9,3 @@ export function normalizePhone(input: string): string {
   if (digits.length === 11 && digits.startsWith("1")) return `+${digits}`;
   return digits;
 }
-
-export function formatPhoneForDisplay(digits: string): string {
-  const d = digits.replace(/\D/g, "");
-  if (d.length === 10) {
-    return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
-  }
-  return digits;
-}
