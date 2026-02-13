@@ -106,16 +106,16 @@ const CountrySelect = ({
           />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[300px] p-0 overflow-hidden rounded-md shadow-md">
-        <Command key={isOpen ? "open" : "closed"} className="rounded-md border-0">
+      <PopoverContent className="w-[300px] p-0 overflow-hidden rounded-md border border-[var(--text)]/30 shadow-md bg-[var(--bg)] text-[var(--text)]">
+        <Command key={isOpen ? "open" : "closed"} className="rounded-md border-0 bg-[var(--bg)] text-[var(--text)]">
           <CommandInput
             placeholder="Search country..."
-            className="placeholder:text-popover-foreground/80"
+            className="placeholder:text-[var(--text)]/80"
           />
           <CommandList>
             <ScrollArea ref={scrollAreaRef} className="h-72">
               <CommandEmpty>No country found.</CommandEmpty>
-              <CommandGroup className="text-popover-foreground">
+              <CommandGroup className="text-[var(--text)]">
                 {countryList.map(({ value, label }) =>
                   value ? (
                     <CountrySelectOption
@@ -164,7 +164,7 @@ const CountrySelectOption = ({
     >
       <FlagComponent country={country} countryName={countryName} />
       <span className="flex-1 text-sm">{countryName}</span>
-      <span className="text-sm text-popover-foreground/85">{`+${RPNInput.getCountryCallingCode(country)}`}</span>
+      <span className="text-sm text-[var(--text)]/85">{`+${RPNInput.getCountryCallingCode(country)}`}</span>
       <CheckIcon
         className={cn("ml-auto size-4", country === selectedCountry ? "opacity-100" : "opacity-0")}
       />
