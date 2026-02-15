@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ConversationStarters } from "@/components/conversation-starters";
 import { cn } from "@/lib/utils";
 
 export const metadata = {
@@ -162,6 +163,10 @@ export default function LetterPage() {
             />
           </figure>
         </div>
+
+        <section className="mt-[clamp(32px,5vh,56px)] pt-8 border-t border-love-bg/15">
+          <ConversationStarters inverted />
+        </section>
 
         <p className="m-0 mt-[clamp(24px,4vh,40px)] text-center">
           <Link href="/" className="text-love-bg hover:underline">
