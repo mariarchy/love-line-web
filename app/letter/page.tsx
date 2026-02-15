@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { ConversationStarters } from "@/components/conversation-starters";
+import { TrackedLink } from "@/components/tracked-link";
 import { cn } from "@/lib/utils";
 
 export const metadata = {
@@ -169,9 +169,13 @@ export default function LetterPage() {
         </section>
 
         <p className="m-0 mt-[clamp(24px,4vh,40px)] text-center">
-          <Link href="/" className="text-love-bg hover:underline">
+          <TrackedLink
+            href="/"
+            eventName="home_link_click"
+            className="text-love-bg hover:underline"
+          >
             ── .✧ take me home ✧. ──
-          </Link>
+          </TrackedLink>
         </p>
       </main>
     </div>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePostHog } from "posthog-js/react";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { cn } from "@/lib/utils";
 
@@ -16,11 +17,19 @@ type LookupError = {
   error: string;
 };
 
+function normalizeErrorType(error: string): string {
+  const lower = error.toLowerCase();
+  if (lower.includes("not found") || lower.includes("no match")) return "not_found";
+  if (lower.includes("invalid") || lower.includes("valid")) return "invalid";
+  return "error";
+}
+
 export function PhoneLookup({
   defaultCountry = "US",
 }: {
   defaultCountry?: React.ComponentProps<typeof PhoneInput>["defaultCountry"];
 }) {
+  const posthog = usePostHog();
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [result, setResult] = useState<LookupResult | null>(null);
@@ -33,6 +42,7 @@ export function PhoneLookup({
     setStatus("loading");
     setError(null);
     setResult(null);
+    posthog?.capture("lookup_started");
 
     try {
       const res = await fetch("/api/lookup", {
@@ -45,13 +55,18 @@ export function PhoneLookup({
       if (data.ok) {
         setResult(data);
         setStatus("success");
+        posthog?.capture("lookup_success");
       } else {
         setError(data.error);
         setStatus("error");
+        posthog?.capture("lookup_error", {
+          error_type: normalizeErrorType(data.error),
+        });
       }
     } catch {
       setError("Something went wrong. Try again.");
       setStatus("error");
+      posthog?.capture("lookup_error", { error_type: "server_error" });
     }
   }
 

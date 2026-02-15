@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { NapkinImage } from "@/components/napkin-image";
 import { PhoneLookup } from "@/components/phone-lookup";
+import { TrackedLink } from "@/components/tracked-link";
 
 export default function HomePage() {
   return (
@@ -20,12 +20,13 @@ export default function HomePage() {
       </section>
 
       <p className="letter-link shrink-0 m-0">
-        <Link
+        <TrackedLink
           href="/letter"
+          eventName="letter_link_click"
           className="text-love-text no-underline italic text-[1.1em] tracking-wide hover:underline"
         >
           ── .✧ read me before your date ✧. ──
-        </Link>
+        </TrackedLink>
       </p>
     </main>
   );
